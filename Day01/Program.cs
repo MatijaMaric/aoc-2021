@@ -1,6 +1,6 @@
 using Utils;
 
-var input = await InputFetcher.GetDayAsync(1);
+var input = await Input.GetDayAsync(1);
 
 var split = input.Trim().Split('\n');
 var numbers = split.Select(int.Parse).ToArray();

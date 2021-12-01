@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Utils
 {
-	public static class InputFetcher
+	public static class Input
 	{
 		private static string getCookie()
 		{
