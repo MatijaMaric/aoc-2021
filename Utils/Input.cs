@@ -33,11 +33,11 @@ namespace Utils
 			return await result.Content.ReadAsStringAsync();
 		}
 
-		public static async Task<List<int>> GetNumbersAsync(int day, int year = 2021)
+		public static async Task<int[]> GetNumbersAsync(int day, int year = 2021)
 		{
 			var input = await GetDayAsync(day, year);
 
-			return input.Trim().Split('\n').Select(int.Parse).ToList();
+			return input.Trim().Split('\n').Select(int.Parse).ToArray();
 		}
 	}
 }

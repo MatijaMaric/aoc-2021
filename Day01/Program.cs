@@ -4,7 +4,7 @@ var numbers = await Input.GetNumbersAsync(1);
 var res = 0;
 var sums = new List<int>();
 
-for (int i = 1; i < numbers.Count; i++)
+for (int i = 1; i < numbers.Length; i++)
 {
 	if (numbers[i] > numbers[i - 1])
 	{
@@ -13,9 +13,10 @@ for (int i = 1; i < numbers.Count; i++)
 }
 
 
-for (int i = 0; i < numbers.Count - 2; i++)
+
+for (int i = 0; i < numbers.Length - 2; i++)
 {
-	sums.Add(numbers[i] + numbers[i + 1] + numbers[i + 2]);
+	sums.Add(numbers[i..(i + 3)].Sum());
 }
 
 var res2 = 0;
