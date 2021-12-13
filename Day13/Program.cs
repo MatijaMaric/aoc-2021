@@ -2,28 +2,6 @@ using Utils;
 
 var input = await Input.GetDayAsync(13);
 
-//var input = @"6,10
-//0,14
-//9,10
-//0,3
-//10,4
-//4,11
-//6,0
-//6,12
-//4,1
-//0,13
-//10,12
-//3,4
-//3,0
-//8,4
-//1,10
-//2,14
-//8,10
-//9,0
-
-//fold along y=7
-//fold along x=5";
-
 var s = input.Trim().Split("\n\n");
 var dots = s[0].Split('\n').Select(x => x.Split(',').Select(int.Parse).ToArray());
 var folds = s[1].Split('\n').Select(x => x.Substring(11).Split('=')).ToList();
@@ -91,25 +69,14 @@ foreach (var fold in folds)
 	}
 
 	grid = newGrid;
+	Console.WriteLine(grid.Count);
 }
 
-
-//for (var x = 0; x < width; x++)
-//{
-//	for (var y = 0; y < height; y++)
-//	{
-//		Console.Write(grid.Contains((x, y)) ? "#" : ".");
-//	}
-//	Console.WriteLine();
-//}
-//Console.WriteLine();
-	for (var y = 0; y <= height; y++)
+for (var y = 0; y <= height; y++)
 {
-for (var x = 0; x <= width; x++)
+	for (var x = 0; x <= width; x++)
 	{
 		Console.Write(grid.Contains((x, y)) ? "#" : ".");
 	}
 	Console.WriteLine();
 }
-
-//Console.WriteLine(newGrid.Count);
