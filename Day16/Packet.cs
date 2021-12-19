@@ -5,6 +5,8 @@ namespace Day16
 		public int Version { get; set; }
 		public PacketType Type { get; set; }
 
+		public virtual long Value { get; protected set; } = 0;
+
 		public int Length { get; protected set; }
 
 		protected Packet(int version, PacketType type, ReaderBoy bits)
@@ -24,7 +26,14 @@ namespace Day16
 			Packet packet = type switch
 			{
 				PacketType.Literal => new LiteralPacket(version, bits),
-				_ => new OperatorPacket(version, type, bits)
+				PacketType.Sum => new SumPacket(version, bits),
+				PacketType.Product => new ProductPacket(version, bits),
+				PacketType.Minimum => new MinimumPacket(version, bits),
+				PacketType.Maximum => new MaximumPacket(version, bits),
+				PacketType.GreaterThan => new GreaterThanPacket(version, bits),
+				PacketType.LessThan => new LessThanPacket(version, bits),
+				PacketType.Equal => new EqualPacket(version, bits),
+				_ => throw new ArgumentOutOfRangeException()
 			};
 
 			if (packet.Consume(bits))

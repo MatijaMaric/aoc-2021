@@ -11,7 +11,7 @@ namespace Day16
 
 		private LengthType _lengthType = LengthType.None;
 		private int _length = -1;
-		private List<Packet> _packets = new List<Packet>();
+		public List<Packet> SubPackets { get; } = new();
 
 		public OperatorPacket(int version, PacketType type, ReaderBoy bits) : base(version, type, bits)
 		{
@@ -48,9 +48,10 @@ namespace Day16
 
 					_length -= packet.Length;
 					Length += packet.Length;
-					_packets.Add(packet);
+					SubPackets.Add(packet);
 				}
-			} else if (_lengthType == LengthType.Subpackets)
+			}
+			else if (_lengthType == LengthType.Subpackets)
 			{
 				for (var i = 0; i < _length; i++)
 				{
@@ -61,7 +62,7 @@ namespace Day16
 					}
 
 					Length += packet.Length;
-					_packets.Add(packet);
+					SubPackets.Add(packet);
 				}
 			}
 

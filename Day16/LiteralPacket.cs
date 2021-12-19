@@ -12,7 +12,7 @@ namespace Day16
 		{
 		}
 
-		public int Value { get; set; }
+		public override long Value { get; protected set; }
 
 		protected override bool Consume(ReaderBoy bits)
 		{
