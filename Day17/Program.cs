@@ -2,19 +2,13 @@ using System.Text.RegularExpressions;
 using Utils;
 
 var input = await Input.GetDayAsync(17);
-//input = "target area: x=20..30, y=-10..-5";
 var regex = new Regex(@"target area: x=(?<x0>.*)\.\.(?<x1>.*), y=(?<y0>.*)\.\.(?<y1>.*)");
 var g = regex.Match(input);
 
-var x0 = int.Parse(g.Groups["x0"].Value);
-var x1 = int.Parse(g.Groups["x1"].Value);
-var y0 = int.Parse(g.Groups["y0"].Value);
-var y1 = int.Parse(g.Groups["y1"].Value);
-
-var minX = Math.Min(x0, x1);
-var maxX = Math.Max(x0, x1);
-var minY = Math.Min(y0, y1);
-var maxY = Math.Max(y0, y1);
+var minX = int.Parse(g.Groups["x0"].Value);
+var maxX = int.Parse(g.Groups["x1"].Value);
+var minY = int.Parse(g.Groups["y0"].Value);
+var maxY = int.Parse(g.Groups["y1"].Value);
 
 bool TrySolve(int vx0, int vy0, out int peakY)
 {
@@ -24,13 +18,14 @@ bool TrySolve(int vx0, int vy0, out int peakY)
 	while (x <= maxX && y >= minY)
 	{
 		x += vx;
-		if (vx > 0)
+		switch (vx)
 		{
-			vx--;
-		}
-		else if (vx < 0)
-		{
-			vx++;
+			case > 0:
+				vx--;
+				break;
+			case < 0:
+				vx++;
+				break;
 		}
 		y += vy--;
 		peakY = Math.Max(peakY, y);
@@ -51,9 +46,6 @@ var fromY = -Math.Max(Math.Abs(minY), Math.Abs(maxY))*2;
 var toY = -fromY;
 var hits = 0;
 
-TrySolve(6, 0, out var test);
-Console.WriteLine(test);
-
 for (var vx = fromX; vx <= toX; vx++)
 {
 	for (var vy = fromY; vy <= toY; vy++)
@@ -62,7 +54,6 @@ for (var vx = fromX; vx <= toX; vx++)
 		{
 			bestY = Math.Max(bestY, peakY);
 			hits++;
-			//Console.WriteLine($"{vx}, {vy}");
 		}
 	}
 }
